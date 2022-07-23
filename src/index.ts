@@ -28,7 +28,7 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 	const aidokuBackup: AidokuBackup = {
 		library: [],
 		history: [],
-		sources: new Set<string>(),
+		sources: [],
 		manga: [],
 		chapters: [],
 		trackItems: [], // TODO
@@ -39,6 +39,7 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 	};
 
 	const convertersNotFound: Set<string> = new Set<string>();
+	const sources: Set<string> = new Set<string>();
 
 	decoded.backupManga.forEach((manga) => {
 		const converter = converters.find((c) => c.tachiyomiSourceId === manga.source.toString());
@@ -46,7 +47,7 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 			convertersNotFound.add(manga.source.toString());
 			return;
 		}
-		aidokuBackup.sources.add(converter.aidokuSourceId);
+		sources.add(converter.aidokuSourceId);
 
 		const aidokuManga = converter.parseMangaObject(manga);
 
@@ -109,6 +110,7 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 		);
 	}
 
+	aidokuBackup.sources = [...sources];
 	return {
 		backup: aidokuBackup,
 		dateString: dateString,
