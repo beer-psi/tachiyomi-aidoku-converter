@@ -1,0 +1,21 @@
+{
+  "name": "tachiyomi-aidoku-converter",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "long": "^5.2.0",
+    "protobufjs": "~6.11.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.35"
+  }
+}
