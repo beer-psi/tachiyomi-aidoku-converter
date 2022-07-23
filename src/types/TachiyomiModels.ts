@@ -117,6 +117,9 @@ export class BackupTracking extends Message<BackupTracking> {
 
 	@Field.d(11, 'int64', 'optional')
 	public finishedReadingDate: Long = new Long(0);
+
+	@Field.d(100, 'int64', 'optional')
+	public mediaId: Long = new Long(0);
 }
 
 @Type.d()
