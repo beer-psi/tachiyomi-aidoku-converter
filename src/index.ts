@@ -7,6 +7,16 @@ interface AidokuResult {
 	dateString: string;
 }
 
+const TACHIYOMI_TRACKERS: { [key: number]: string } = {
+	1: 'myanimelist',
+	2: 'anilist',
+	// 3: "kitsu",
+	// 4: "shikimori",
+	// 5: "bangumi",
+	// 6: "komga",
+	// 7: "mangaupdates"
+};
+
 export default function toAidoku(backup: Uint8Array): AidokuResult {
 	const dateString = new Date(Date.now()).toISOString().split('T')[0];
 
@@ -77,6 +87,23 @@ export default function toAidoku(backup: Uint8Array): AidokuResult {
 				),
 			});
 		});
+
+		aidokuBackup.trackItems.push(
+			...manga.tracking
+				.filter((t) => t.syncId <= 2) // Only support MAL and AniList tracking
+				.map((t) => ({
+					// https://anilist.co/manga/31706/JoJo-no-Kimyou-na-Bouken-Steel-Ball-Run/
+					// https://myanimelist.net/manga/1706/JoJo_no_Kimyou_na_Bouken_Part_7__Steel_Ball_Run
+					//
+					// HACK: For now, there's only tracking support for MAL and AniList, which has similar
+					// URL structures. I'm not going to bother writing another converter class.
+					id: t.trackingUrl.split('/')[4],
+					trackerId: TACHIYOMI_TRACKERS[t.syncId],
+					mangaId: aidokuManga.id,
+					sourceId: converter.aidokuSourceId,
+					title: aidokuManga.title,
+				}))
+		);
 	}
 
 	if (convertersNotFound.length > 0) {
