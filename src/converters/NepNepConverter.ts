@@ -1,9 +1,11 @@
 import { Converter } from './AbstractConverter.js';
 
-abstract class NepNepConverter extends Converter {
-	override aidokuSourceId: string = 'en.nepnep';
+class NepNepConverter extends Converter {
+	constructor(public baseUrl: string, public tachiyomiSourceId: string) {
+		super();
+	}
 
-	override aidokuSourceName: string = 'NepNep';
+	override aidokuSourceId: string = 'en.nepnep';
 
 	override lang = 'en';
 
@@ -14,26 +16,13 @@ abstract class NepNepConverter extends Converter {
 	override parseChapterId(url: string): string {
 		return url.replace('/read-online/', '');
 	}
-}
-
-class MangaSeeConverter extends NepNepConverter {
-	override tachiyomiSourceName: string = 'MangaSee';
-
-	override tachiyomiSourceId: string = '9';
 
 	override parseMangaUrl(url: string): string {
-		return `https://mangasee123.com${url}`;
+		return `${this.baseUrl}${url}`;
 	}
 }
 
-class MangaLifeConverter extends NepNepConverter {
-	override tachiyomiSourceName: string = 'MangaLife';
-
-	override tachiyomiSourceId: string = '7798162483793432927';
-
-	override parseMangaUrl(url: string): string {
-		return `https://manga4life.com${url}`;
-	}
-}
-
-export default [new MangaLifeConverter(), new MangaSeeConverter()];
+export default [
+	new NepNepConverter('https://mangasee123.com', '9'),
+	new NepNepConverter('https://manga4life.com', '7798162483793432927'),
+];

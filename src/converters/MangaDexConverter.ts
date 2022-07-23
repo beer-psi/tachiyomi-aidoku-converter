@@ -3,10 +3,6 @@ import { BackupManga } from '../types/TachiyomiModels.js';
 import { Converter } from './AbstractConverter.js';
 
 class MangaDexConverter extends Converter {
-	override tachiyomiSourceName: string = 'MangaDex';
-
-	override aidokuSourceName: string = 'MangaDex';
-
 	override aidokuSourceId: string = 'multi.mangadex';
 
 	constructor(public tachiyomiSourceId: string, public lang: string) {

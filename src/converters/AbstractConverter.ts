@@ -18,16 +18,6 @@ export abstract class Converter {
 	abstract lang: string;
 
 	/**
-	 * The Tachiyomi source name for this source.
-	 */
-	abstract tachiyomiSourceName: string;
-
-	/**
-	 * The Aidoku source name for this source.
-	 */
-	abstract aidokuSourceName: string;
-
-	/**
 	 * Converts a Tachiyomi BackupManga.url to an Aidoku manga identifier.
 	 * @param url
 	 */

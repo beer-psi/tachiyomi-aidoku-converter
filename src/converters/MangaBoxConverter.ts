@@ -15,11 +15,7 @@ abstract class MangaBoxConverter extends Converter {
 class MangaBatConverter extends MangaBoxConverter {
 	override baseUrl: string = 'https://m.mangabat.com';
 
-	override tachiyomiSourceName: string = 'Mangabat';
-
 	override tachiyomiSourceId: string = '4215511432986138970';
-
-	override aidokuSourceName: string = 'MangaBat';
 
 	override aidokuSourceId: string = 'en.mangabat';
 
@@ -33,11 +29,7 @@ class MangaBatConverter extends MangaBoxConverter {
 class MangaNatoConverter extends MangaBoxConverter {
 	override baseUrl: string = 'https://manganato.com';
 
-	override tachiyomiSourceName: string = 'Manganato';
-
 	override tachiyomiSourceId: string = '1024627298672457456';
-
-	override aidokuSourceName: string = 'MangaNato';
 
 	override aidokuSourceId: string = 'en.manganato';
 
