@@ -1,68 +1,68 @@
 export type AidokuBackup = {
-    library:    Library[];
-    history:    History[];
-    manga:      Manga[];
-    chapters:   Chapter[];
-    sources:    string[];
-    categories: string[];
-    trackItems: TrackItem[];
-    date:       number;
-    name?:      string;
-    version:    string;
-}
+	library: Library[];
+	history: History[];
+	manga: Manga[];
+	chapters: Chapter[];
+	sources: string[];
+	categories: string[];
+	trackItems: TrackItem[];
+	date: number;
+	name?: string;
+	version: string;
+};
 
 export interface History {
-    progress:  number;
-    mangaId:   string;
-    chapterId: string;
-    completed: boolean;
-    sourceId:  string;
-    dateRead:  number;
+	progress: number;
+	mangaId: string;
+	chapterId: string;
+	completed: boolean;
+	sourceId: string;
+	dateRead: number;
 }
 
 export interface Manga {
-    id:         string;
-    lastUpdate: number;
-    author:     string;
-    url:        string;
-    nsfw:       number;
-    tags:       string[];
-    title:      string;
-    sourceId:   string;
-    desc:       string;
-    cover:      string;
-    viewer:     number;
-    status:     number;
+	id: string;
+	lastUpdate: number;
+	author: string;
+	url: string;
+	nsfw: number;
+	tags: string[];
+	title: string;
+	sourceId: string;
+	desc: string;
+	cover: string;
+	viewer: number;
+	status: number;
 }
 
 export interface Chapter {
-    volume?:      number;
-    mangaId:      string;
-    lang:         string;
-    id:           string;
-    scanlator:    string;
-    title?:       string;
-    sourceId:     string;
-    dateUploaded: number;
-    chapter:      number;
-    sourceOrder:  number;
+	volume?: number;
+	mangaId: string;
+	lang: string;
+	id: string;
+	scanlator: string;
+	title?: string;
+	sourceId: string;
+	dateUploaded: number;
+	chapter: number;
+	sourceOrder: number;
 }
 
 export interface Library {
-    mangaId:     string;
-    lastUpdated: number;
-    categories:  string[];
-    dateAdded:   number;
-    sourceId:    string;
-    lastOpened:  number;
+	mangaId: string;
+	lastUpdated: number;
+	categories: string[];
+	dateAdded: number;
+	sourceId: string;
+	lastOpened: number;
 }
 
 export interface TrackItem {
-    id:        string;
-    trackerId: string;
-    mangaId:   string;
-    sourceId:  string;
-    title?:    string;
+	id: string;
+	trackerId: string;
+	mangaId: string;
+	sourceId: string;
+	title?: string;
 }
 
 export enum MangaViewer {
