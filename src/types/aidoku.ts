@@ -3,7 +3,7 @@ export type AidokuBackup = {
 	history: History[];
 	manga: Manga[];
 	chapters: Chapter[];
-	sources: string[];
+	sources: Set<string>;
 	categories: string[];
 	trackItems: TrackItem[];
 	date: number;
