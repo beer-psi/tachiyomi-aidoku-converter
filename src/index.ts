@@ -17,7 +17,7 @@ const TACHIYOMI_TRACKERS: { [key: number]: string } = {
 	// 7: "mangaupdates"
 };
 
-export default function toAidoku(backup: Uint8Array): AidokuResult {
+export function toAidoku(backup: Uint8Array): AidokuResult {
 	const dateString = new Date(Date.now()).toISOString().split('T')[0];
 
 	const decoded: Backup = Backup.decode(backup);
