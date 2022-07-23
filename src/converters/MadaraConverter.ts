@@ -12,11 +12,11 @@ class MadaraConverter extends Converter {
 	}
 
 	override parseMangaId(url: string): string {
-		return url.replace(`/${this.sourcePath}/`, '');
+		return url.replace(`/${this.sourcePath}/`, '').replace(/\/$/, '');
 	}
 
 	override parseChapterId(url: string): string {
-		return this.parseMangaId(url);
+		return url.replace(`/${this.sourcePath}/`, '');
 	}
 
 	override parseMangaUrl(url: string): string {
@@ -26,7 +26,7 @@ class MadaraConverter extends Converter {
 
 export default [
 	new MadaraConverter('https://coloredmanga.com', 'en', '8808685646100968349', 'en.coloredmanga'),
-	new MadaraConverter('https://hentaicb.top', 'vi', '823638192569572166', 'vi.hentaicb'),
+	new MadaraConverter('https://hentaicb.top', 'vi', '823638192569572166', 'vi.hentaicube'),
 	new MadaraConverter('https://lilymanga.com', 'en', '4480996639887718467', 'en.lilymanga', 'ys'),
 	new MadaraConverter('https://mangatx.com', 'en', '3274683761704614629', 'en.mangatx'),
 	new MadaraConverter('https://manhuaplus.com', 'en', '9030178752551947945', 'en.manhuaplus'),
