@@ -76,7 +76,7 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 				completed: chapter.read,
 				sourceId: converter.aidokuSourceId,
 				dateRead: Math.floor(
-					manga.history
+					[...manga.history, ...manga.brokenHistory]
 						.find((h) => h.url === chapter.url)
 						?.lastRead?.divide(1000)
 						.toNumber() ?? 0
