@@ -1,5 +1,5 @@
-import { Chapter, Manga, MangaStatus, MangaViewer } from '../types/aidoku.js';
-import { BackupChapter, BackupManga } from '../types/tachiyomi.js';
+import { Chapter, Manga, MangaStatus, MangaViewer } from '../types/aidoku';
+import { BackupChapter, BackupManga } from '../types/tachiyomi';
 
 export abstract class Converter {
 	/**

@@ -1,4 +1,4 @@
-import { Converter } from './AbstractConverter.js';
+import { Converter } from './AbstractConverter';
 
 abstract class MangaBoxConverter extends Converter {
 	abstract baseUrl: string;

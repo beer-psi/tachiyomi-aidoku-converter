@@ -1,4 +1,4 @@
-import { Converter } from './AbstractConverter.js';
+import { Converter } from './AbstractConverter';
 
 /**
  * Generic converter class for sources that use the URL as the manga/chapter ID.

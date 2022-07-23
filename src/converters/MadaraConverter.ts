@@ -1,4 +1,4 @@
-import { Converter } from './AbstractConverter.js';
+import { Converter } from './AbstractConverter';
 
 class MadaraConverter extends Converter {
 	constructor(

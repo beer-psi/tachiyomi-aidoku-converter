@@ -1,6 +1,6 @@
-import { Manga } from '../types/aidoku.js';
-import { BackupManga } from '../types/tachiyomi.js';
-import { Converter } from './AbstractConverter.js';
+import { Manga } from '../types/aidoku';
+import { BackupManga } from '../types/tachiyomi';
+import { Converter } from './AbstractConverter';
 
 class MangaDexConverter extends Converter {
 	override aidokuSourceId: string = 'multi.mangadex';

@@ -1,8 +1,8 @@
-import MangaDexConverters from './MangaDexConverter.js';
-import NepNepConverters from './NepNepConverter.js';
-import MangaBoxConverters from './MangaBoxConverter.js';
-import UrlAsIdConverters from './UrlAsIdConverter.js';
-import MadaraConverters from './MadaraConverter.js';
+import MangaDexConverters from './MangaDexConverter';
+import NepNepConverters from './NepNepConverter';
+import MangaBoxConverters from './MangaBoxConverter';
+import UrlAsIdConverters from './UrlAsIdConverter';
+import MadaraConverters from './MadaraConverter';
 
 export default [
 	...MangaDexConverters,
