@@ -7,7 +7,7 @@ interface AidokuResult {
 	dateString: string;
 }
 
-export default function toAidoku(backup: Buffer): AidokuResult {
+export default function toAidoku(backup: Uint8Array): AidokuResult {
 	const dateString = new Date(Date.now()).toISOString().split('T')[0];
 
 	const decoded: Backup = Backup.decode(backup);
