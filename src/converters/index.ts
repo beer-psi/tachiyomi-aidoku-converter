@@ -1,3 +1,4 @@
-import MDConverters from './MangaDexConverter.js';
+import MangaDexConverters from './MangaDexConverter.js';
+import NepNepConverters from './NepNepConverter.js';
 
-const allConverters = MDConverters;
+export default [...MangaDexConverters, ...NepNepConverters];

@@ -1,5 +1,5 @@
 import { Chapter, Manga, MangaStatus, MangaViewer } from "../types/aidoku.js";
-import { BackupChapter, BackupHistory, BackupManga, BrokenBackupHistory } from "../types/TachiyomiModels.js";
+import { BackupChapter, BackupManga } from "../types/TachiyomiModels.js";
 
 export abstract class Converter {
     /**
@@ -88,9 +88,4 @@ export abstract class Converter {
             sourceOrder: chapter.sourceOrder,
         }
     }
-
-    parseHistoryObject(manga: BackupManga, history: BackupHistory | BrokenBackupHistory): History {
-
-    }
-
 }

@@ -43,11 +43,11 @@ export class BackupCategory extends Message<BackupCategory> {
     @Field.d(1, "string", "required")
     public name!: string;
 
-    @Field.d(2, "int32", "required")
-    public order!: string;
+    @Field.d(2, "int64", "optional")
+    public order: Long = new Long(0);
 
-    @Field.d(100, "int32", "required")
-    public flags!: string;
+    @Field.d(100, "int64", "optional")
+    public flags: Long = new Long(0);
 }
 
 @Type.d()
@@ -70,11 +70,11 @@ export class BackupChapter extends Message<BackupChapter> {
     @Field.d(6, "int32", "optional")
     public lastPageRead: number = 0;
 
-    @Field.d(7, "int64", "required")
-    public dateFetch!: Long;
+    @Field.d(7, "int64", "optional")
+    public dateFetch: Long = new Long(0);
 
-    @Field.d(8, "int64", "required")
-    public dateUpload!: Long;
+    @Field.d(8, "int64", "optional")
+    public dateUpload: Long = new Long(0);
 
     @Field.d(9, "float", "optional")
     public chapterNumber: number = 0;
@@ -91,32 +91,32 @@ export class BackupTracking extends Message<BackupTracking> {
     @Field.d(2, "int64", "required")
     public libraryId!: Long;
 
-    @Field.d(3, "int32", "required")
-    public mediaId!: number;
+    @Field.d(3, "int32", "optional")
+    public mediaIdInt: number = 0;
 
-    @Field.d(4, "string", "required")
-    public trackingUrl!: string;
+    @Field.d(4, "string", "optional")
+    public trackingUrl: string = "";
 
-    @Field.d(5, "string", "required")
-    public title!: string;
+    @Field.d(5, "string", "optional")
+    public title: string = "";
 
-    @Field.d(6, "float", "required")
-    public lastChapterRead!: string;
+    @Field.d(6, "float", "optional")
+    public lastChapterRead: number = 0.0;
 
-    @Field.d(7, "int32", "required")
-    public totalChapters!: string;
+    @Field.d(7, "int32", "optional")
+    public totalChapters: number = 0;
 
-    @Field.d(8, "float", "required")
-    public score!: number;
+    @Field.d(8, "float", "optional")
+    public score: number = 0.0;
 
-    @Field.d(9, "int32", "required")
-    public status!: number;
+    @Field.d(9, "int32", "optional")
+    public status: number = 0;
 
-    @Field.d(10, "int64", "required")
-    public startedReadingDate!: Long;
+    @Field.d(10, "int64", "optional")
+    public startedReadingDate: Long = new Long(0);
 
-    @Field.d(11, "int64", "required")
-    public finishedReadingDate!: Long;
+    @Field.d(11, "int64", "optional")
+    public finishedReadingDate: Long = new Long(0);
 }
 
 @Type.d()
@@ -127,8 +127,8 @@ export class BackupManga extends Message<BackupManga> {
     @Field.d(2, "string", "required")
     public url!: string;
 
-    @Field.d(3, "string", "required")
-    public title!: string;
+    @Field.d(3, "string", "optional")
+    public title: string = "";
 
     @Field.d(4, "string", "optional")
     public artist?: string;
@@ -140,10 +140,10 @@ export class BackupManga extends Message<BackupManga> {
     public description?: string;
 
     @Field.d(7, "string", "repeated")
-    public genre!: string[];
+    public genre: string[] = [];
 
-    @Field.d(8, "int32", "required")
-    public status!: number;
+    @Field.d(8, "int32", "optional")
+    public status: number = 0;
 
     @Field.d(9, "string", "optional")
     public thumbnailUrl?: string;
@@ -155,13 +155,13 @@ export class BackupManga extends Message<BackupManga> {
     public viewer: number = 0;
 
     @Field.d(16, BackupChapter, "repeated")
-    public chapters!: BackupChapter[];
+    public chapters: BackupChapter[] = [];
 
-    @Field.d(17, "int32", "repeated")
-    public categories!: number[];
+    @Field.d(17, "int64", "repeated")
+    public categories: Long[] = [];
 
     @Field.d(18, BackupTracking, "repeated")
-    public tracking!: BackupTracking[];
+    public tracking: BackupTracking[] = [];
 
     @Field.d(100, "bool", "optional")
     public favorite: boolean = false;
@@ -170,26 +170,26 @@ export class BackupManga extends Message<BackupManga> {
     public chapterFlags: number = 0;
 
     @Field.d(102, BrokenBackupHistory, "repeated")
-    public brokenHistory!: BrokenBackupHistory[];
+    public brokenHistory: BrokenBackupHistory[] = [];
 
     @Field.d(103, "int32", "optional")
     public viewerFlags?: number;
 
     @Field.d(104, BackupHistory, "repeated")
-    public history!: BackupHistory[];
+    public history: BackupHistory[] = [];
 }
 
 @Type.d()
 export class Backup extends Message<Backup> {
     @Field.d(1, BackupManga, "repeated")
-    public backupManga!: BackupManga[];
+    public backupManga: BackupManga[] = [];
 
     @Field.d(2, BackupCategory, "repeated")
-    public backupCategories!: BackupCategory[];
+    public backupCategories: BackupCategory[] = [];
 
     @Field.d(100, BrokenBackupSource, "repeated")
-    public backupBrokenSources!: BrokenBackupSource[];
+    public backupBrokenSources: BrokenBackupSource[] = [];
 
     @Field.d(101, BackupSource, "repeated")
-    public backupSources!: BackupSource[];
+    public backupSources: BackupSource[] = [];
 }

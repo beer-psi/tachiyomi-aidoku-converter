@@ -5,6 +5,7 @@ export type AidokuBackup = {
     chapters:   Chapter[];
     sources:    string[];
     categories: string[];
+    trackItems: TrackItem[];
     date:       number;
     name?:      string;
     version:    string;
@@ -50,10 +51,18 @@ export interface Chapter {
 export interface Library {
     mangaId:     string;
     lastUpdated: number;
-    categories:  any[];
+    categories:  string[];
     dateAdded:   number;
     sourceId:    string;
     lastOpened:  number;
+}
+
+export interface TrackItem {
+    id:        string;
+    trackerId: string;
+    mangaId:   string;
+    sourceId:  string;
+    title?:    string;
 }
 
 export enum MangaViewer {
