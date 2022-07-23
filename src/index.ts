@@ -1,5 +1,5 @@
 import converters from './converters/index.js';
-import { Backup } from './types/TachiyomiModels.js';
+import { Backup } from './types/tachiyomi.js';
 import { AidokuBackup } from './types/aidoku.js';
 
 interface AidokuResult {

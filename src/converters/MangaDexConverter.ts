@@ -1,5 +1,5 @@
 import { Manga } from '../types/aidoku.js';
-import { BackupManga } from '../types/TachiyomiModels.js';
+import { BackupManga } from '../types/tachiyomi.js';
 import { Converter } from './AbstractConverter.js';
 
 class MangaDexConverter extends Converter {
