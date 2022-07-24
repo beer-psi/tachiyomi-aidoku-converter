@@ -1,6 +1,6 @@
 import protobuf from 'protobufjs/light';
 import Long from 'long';
-const { Message, Field, Type } = protobuf;
+export const { Message, Field, Type } = protobuf;
 
 @Type.d()
 export class BrokenBackupHistory extends Message<BrokenBackupHistory> {

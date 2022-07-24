@@ -1,3 +1,4 @@
+import { Converter } from './AbstractConverter';
 import MangaDexConverters from './MangaDexConverter';
 import NepNepConverters from './NepNepConverter';
 import MangaBoxConverters from './MangaBoxConverter';
@@ -20,4 +21,4 @@ export default [
 	...YuriNekoConverter,
 	...HentaiVNConverter,
 	...KoushokuConverter,
-];
+] as unknown[] as Converter[];
