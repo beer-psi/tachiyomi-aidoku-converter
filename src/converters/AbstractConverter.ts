@@ -1,5 +1,7 @@
-import { Chapter, Manga, MangaStatus, MangaViewer } from '../types/aidoku';
+import { Chapter, Library, Manga, MangaStatus, MangaViewer } from '../types/aidoku';
 import { BackupChapter, BackupManga } from '../types/tachiyomi';
+import protobuf from 'protobufjs/light';
+import Long from 'long';
 
 export abstract class Converter {
 	/**
@@ -17,6 +19,8 @@ export abstract class Converter {
 	 */
 	abstract lang: string;
 
+	abstract baseUrl: string;
+
 	/**
 	 * Converts a Tachiyomi BackupManga.url to an Aidoku manga identifier.
 	 * @param url
@@ -29,7 +33,9 @@ export abstract class Converter {
 	 */
 	abstract parseChapterId(url: string): string;
 
-	abstract parseMangaUrl(url: string): string;
+	parseMangaUrl(url: string): string {
+		return `${this.baseUrl}${url}`;
+	}
 
 	private mangaViewer: { [key: number]: MangaViewer } = {
 		1: MangaViewer.LTR,
@@ -49,7 +55,7 @@ export abstract class Converter {
 		6: MangaStatus.Hiatus,
 	};
 
-	parseMangaObject(manga: BackupManga): Manga {
+	toAidokuManga(manga: BackupManga): Manga {
 		return {
 			id: this.parseMangaId(manga.url),
 			lastUpdate: 0, // Not available,
@@ -66,7 +72,7 @@ export abstract class Converter {
 		};
 	}
 
-	parseChapterObject(manga: BackupManga, chapter: BackupChapter): Chapter {
+	toAidokuChapter(manga: BackupManga, chapter: BackupChapter): Chapter {
 		return {
 			sourceId: this.aidokuSourceId,
 			mangaId: this.parseMangaId(manga.url),

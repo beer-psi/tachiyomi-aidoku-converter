@@ -49,7 +49,7 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 		}
 		sources.add(converter.aidokuSourceId);
 
-		const aidokuManga = converter.parseMangaObject(manga);
+		const aidokuManga = converter.toAidokuManga(manga);
 
 		aidokuBackup.manga.push(aidokuManga);
 
@@ -65,7 +65,7 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 		});
 
 		manga.chapters.forEach((chapter) => {
-			const aidokuChapter = converter.parseChapterObject(manga, chapter);
+			const aidokuChapter = converter.toAidokuChapter(manga, chapter);
 
 			aidokuBackup.chapters.push(aidokuChapter);
 

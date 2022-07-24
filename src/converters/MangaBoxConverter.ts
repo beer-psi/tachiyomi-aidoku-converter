@@ -1,8 +1,6 @@
 import { Converter } from './AbstractConverter';
 
 abstract class MangaBoxConverter extends Converter {
-	abstract baseUrl: string;
-
 	override parseMangaId(url: string): string {
 		return this.parseMangaUrl(url);
 	}

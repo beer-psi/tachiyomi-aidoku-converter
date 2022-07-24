@@ -12,7 +12,8 @@ export type AidokuBackup = {
 };
 
 export interface History {
-	progress: number;
+	progress?: number;
+	total?: number;
 	mangaId: string;
 	chapterId: string;
 	completed: boolean;
@@ -23,14 +24,15 @@ export interface History {
 export interface Manga {
 	id: string;
 	lastUpdate: number;
-	author: string;
-	url: string;
+	author?: string;
+	artist?: string;
+	url?: string;
 	nsfw: number;
-	tags: string[];
+	tags?: string[];
 	title: string;
 	sourceId: string;
-	desc: string;
-	cover: string;
+	desc?: string;
+	cover?: string;
 	viewer: number;
 	status: number;
 }
@@ -40,17 +42,18 @@ export interface Chapter {
 	mangaId: string;
 	lang: string;
 	id: string;
-	scanlator: string;
+	scanlator?: string;
 	title?: string;
 	sourceId: string;
-	dateUploaded: number;
-	chapter: number;
+	dateUploaded?: number;
+	chapter?: number;
 	sourceOrder: number;
 }
 
 export interface Library {
 	mangaId: string;
 	lastUpdated: number;
+	lastRead?: number;
 	categories: string[];
 	dateAdded: number;
 	sourceId: string;

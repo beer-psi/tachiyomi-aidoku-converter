@@ -18,10 +18,6 @@ class MadaraConverter extends Converter {
 	override parseChapterId(url: string): string {
 		return url.replace(`/${this.sourcePath}/`, '');
 	}
-
-	override parseMangaUrl(url: string): string {
-		return `${this.baseUrl}${url}`;
-	}
 }
 
 export default [

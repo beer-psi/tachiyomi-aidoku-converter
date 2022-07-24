@@ -5,6 +5,8 @@ import { Converter } from './AbstractConverter';
 class MangaDexConverter extends Converter {
 	override aidokuSourceId: string = 'multi.mangadex';
 
+	override baseUrl: string = 'https://mangadex.org';
+
 	constructor(public tachiyomiSourceId: string, public lang: string) {
 		super();
 	}
@@ -17,13 +19,9 @@ class MangaDexConverter extends Converter {
 		return url.replace('/chapter/', '');
 	}
 
-	override parseMangaUrl(url: string): string {
-		return `https://mangadex.org${url}`;
-	}
-
-	override parseMangaObject(manga: BackupManga): Manga {
-		let aidokuManga = super.parseMangaObject(manga);
-		aidokuManga.tags = aidokuManga.tags.map((t) => t.split(':')[1]?.trim() ?? t);
+	override toAidokuManga(manga: BackupManga): Manga {
+		let aidokuManga = super.toAidokuManga(manga);
+		aidokuManga.tags = aidokuManga.tags?.map((t) => t.split(':')[1]?.trim() ?? t);
 		return aidokuManga;
 	}
 }
