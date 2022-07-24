@@ -22,8 +22,8 @@ export class BackupHistory extends Message<BackupHistory> {
 
 @Type.d()
 export class BrokenBackupSource extends Message<BrokenBackupSource> {
-	@Field.d(0, 'string', 'required')
-	public name!: string;
+	@Field.d(0, 'string', 'optional')
+	public name: string = '';
 
 	@Field.d(1, 'int64', 'required')
 	public sourceId!: Long;
@@ -31,8 +31,8 @@ export class BrokenBackupSource extends Message<BrokenBackupSource> {
 
 @Type.d()
 export class BackupSource extends Message<BackupSource> {
-	@Field.d(1, 'string', 'required')
-	public name!: string;
+	@Field.d(1, 'string', 'optional')
+	public name: string = '';
 
 	@Field.d(2, 'int64', 'required')
 	public sourceId!: Long;
