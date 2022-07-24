@@ -16,7 +16,8 @@ class MadaraConverter extends Converter {
 	}
 
 	override parseChapterId(url: string): string {
-		return url.replace(`/${this.sourcePath}/`, '');
+		const paths = url.replace(`/${this.sourcePath}/`, '').split('/');
+		return `${paths[0]}/${paths[1]}/`;
 	}
 }
 
