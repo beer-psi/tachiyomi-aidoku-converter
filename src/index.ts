@@ -1,11 +1,16 @@
 import converters from './converters/index.js';
+import Long from 'long';
+import protobuf from 'protobufjs/light.js';
 import { Backup } from './types/tachiyomi.js';
 import { AidokuBackup } from './types/aidoku.js';
-import Long from 'long';
+
+protobuf.util.Long = Long;
+protobuf.configure();
 
 interface AidokuResult {
 	backup: AidokuBackup;
 	dateString: string;
+	missingSources: string[];
 }
 
 const TACHIYOMI_TRACKERS: { [key: number]: string } = {
@@ -21,7 +26,7 @@ const TACHIYOMI_TRACKERS: { [key: number]: string } = {
 class LongSet extends Set<Long> {
 	override has(o: Long): boolean {
 		for (const i of this) {
-			if (i.eq(o)) {
+			if (o.eq(i)) {
 				return true;
 			}
 		}
@@ -44,7 +49,7 @@ class LongSet extends Set<Long> {
  * that JSON backups store the number of seconds since Unix epoch. Thus,
  * when serializing the backup to JSON, you need to use a custom replacer:
  *
- *     JSON.stringify(backup, (key, value) => {
+ *     JSON.stringify(backup, (_, v) => {
  *         const date = Date.parse(v);
  *         return isNaN(date) ? v : Math.floor(date / 1000);
  *     });
@@ -79,7 +84,10 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 	decoded.backupManga.forEach((manga) => {
 		const converter = converters.find((c) => c.tachiyomiSourceId.eq(manga.source));
 		if (!converter) {
-			convertersNotFound.add(manga.source);
+			// Filter out local manga and TachiyomiAZ/EH merged manga
+			if (manga.source.ne(0) && manga.source.ne(6969)) {
+				convertersNotFound.add(manga.source);
+			}
 			return;
 		}
 		sources.add(converter.aidokuSourceId);
@@ -148,5 +156,6 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 	return {
 		backup: aidokuBackup,
 		dateString: dateString,
+		missingSources: [...convertersNotFound].map((id) => id.toString()),
 	};
 }

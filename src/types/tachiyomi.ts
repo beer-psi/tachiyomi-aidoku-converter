@@ -8,7 +8,7 @@ export class BrokenBackupHistory extends Message<BrokenBackupHistory> {
 	public url!: string;
 
 	@Field.d(1, 'int64', 'required')
-	public lastRead!: Long;
+	public lastRead: Long = new Long(0);
 }
 
 @Type.d()
@@ -17,7 +17,7 @@ export class BackupHistory extends Message<BackupHistory> {
 	public url!: string;
 
 	@Field.d(2, 'int64', 'required')
-	public lastRead!: Long;
+	public lastRead: Long = new Long(0);
 }
 
 @Type.d()
@@ -26,7 +26,7 @@ export class BrokenBackupSource extends Message<BrokenBackupSource> {
 	public name: string = '';
 
 	@Field.d(1, 'int64', 'required')
-	public sourceId!: Long;
+	public sourceId: Long = new Long(0);
 }
 
 @Type.d()
@@ -35,7 +35,7 @@ export class BackupSource extends Message<BackupSource> {
 	public name: string = '';
 
 	@Field.d(2, 'int64', 'required')
-	public sourceId!: Long;
+	public sourceId: Long = new Long(0);
 }
 
 @Type.d()
@@ -89,7 +89,7 @@ export class BackupTracking extends Message<BackupTracking> {
 	public syncId!: number;
 
 	@Field.d(2, 'int64', 'required')
-	public libraryId!: Long;
+	public libraryId: Long = new Long(0);
 
 	@Field.d(3, 'int32', 'optional')
 	public mediaIdInt: number = 0;
@@ -125,7 +125,7 @@ export class BackupTracking extends Message<BackupTracking> {
 @Type.d()
 export class BackupManga extends Message<BackupManga> {
 	@Field.d(1, 'int64', 'required')
-	public source!: Long;
+	public source: Long = new Long(0);
 
 	@Field.d(2, 'string', 'required')
 	public url!: string;
