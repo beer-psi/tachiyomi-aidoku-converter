@@ -100,6 +100,12 @@ export default [
 			new Long(-1599601267, 594540574, false), // 2553532324170433933
 			'vi.truyenqq'
 		),
+		new UrlAsIdConverter(
+			'https://lectortmo.com',
+			'es',
+			new Long(-1700479790, 965395994, false), // 4146344224513899730
+			'es.tumangaonline'
+		),
 	],
 	...[
 		new TachiUrlAsIdConverter(
@@ -132,5 +138,35 @@ export default [
 			new Long(630869959, 1706408032, false), // 7328966691702591431
 			'vi.blogtruyen'
 		),
-	]
-]
+		new TachiUrlAsIdConverter(
+			'https://phemanga.net',
+			'vi',
+			new Long(-1536888756, 196006640, false), // 841842111356923980
+			'vi.phemanga'
+		),
+		new TachiUrlAsIdConverter(
+			'https://lkdtt.com',
+			'vi',
+			new Long(1904843089, 1572956593, false), // 6755797126867425617
+			'vi.lkdtt'
+		),
+		new TachiUrlAsIdConverter(
+			'https://manga-chan.me',
+			'ru',
+			new Long(7, 0, false), // 7
+			'ru.manga-chan',
+		),
+		new TachiUrlAsIdConverter(
+			'https://y.hentaichan.live',
+			'ru',
+			new Long(274560140, 1281636907, false), // 5504588601186153612
+			'ru.hentai-chan',
+		),
+		new TachiUrlAsIdConverter(
+			'https://yaoi-chan.me',
+			'ru',
+			new Long(-1784495821, 574279755, false), // 2466512768990363955
+			'ru.yaoi-chan',
+		),
+	],
+];

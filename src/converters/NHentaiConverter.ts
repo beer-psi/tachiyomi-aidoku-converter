@@ -24,5 +24,5 @@ export default [
 	new NHentaiConverter('ja', new Long(-486133509, 1100398547, false)), // 4726175775739752699
 	new NHentaiConverter('zh', new Long(1541031717, 512976060, false)), // 2203215402871965477
 	new NHentaiConverter('', new Long(1810939612, 1701962374, false)), // all languages, 7309872737163460316
-	new NHentaiConverter('', new Long(6907, 0, false)) // TachiyomiAZ/EH's NHentai
+	new NHentaiConverter('', new Long(6907, 0, false)), // TachiyomiAZ/EH's NHentai
 ];

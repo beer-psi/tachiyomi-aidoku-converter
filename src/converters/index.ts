@@ -6,9 +6,12 @@ import UrlAsIdConverters from './UrlAsIdConverter.js';
 import MadaraConverters from './MadaraConverter.js';
 import NHentaiConverters from './NHentaiConverter.js';
 import DynastyConverters from './DynastyConverter.js';
+
 import YuriNekoConverter from './YuriNekoConverter.js';
 import HentaiVNConverter from './HentaiVNConverter.js';
 import KoushokuConverter from './KoushokuConverter.js';
+import DmzjConverter from './DmzjConverter.js';
+import HentaiFoxConverter from './HentaiFoxConverter.js';
 
 export default [
 	...MangaDexConverters,
@@ -21,4 +24,6 @@ export default [
 	...YuriNekoConverter,
 	...HentaiVNConverter,
 	...KoushokuConverter,
+	...DmzjConverter,
+	...HentaiFoxConverter,
 ] as unknown[] as Converter[];
