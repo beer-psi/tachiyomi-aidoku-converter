@@ -58,7 +58,7 @@ class LongSet extends Set<Long> {
  * @returns an Aidoku backup.
  */
 export function toAidoku(backup: Uint8Array): AidokuResult {
-	const dateString = new Date(Date.now()).toISOString().split('T')[0];
+	const dateString = new Date().toISOString().split('T')[0];
 
 	const decoded: Backup = Backup.decode(backup);
 	const categoriesMap = Object.fromEntries(
