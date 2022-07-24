@@ -1,4 +1,4 @@
-export type AidokuBackup = {
+export interface AidokuBackup {
 	library: Library[];
 	history: History[];
 	manga: Manga[];
@@ -6,10 +6,10 @@ export type AidokuBackup = {
 	sources: string[];
 	categories: string[];
 	trackItems: TrackItem[];
-	date: number;
+	date: Date;
 	name?: string;
 	version: string;
-};
+}
 
 export interface History {
 	progress?: number;
@@ -18,46 +18,46 @@ export interface History {
 	chapterId: string;
 	completed: boolean;
 	sourceId: string;
-	dateRead: number;
+	dateRead: Date;
 }
 
 export interface Manga {
 	id: string;
-	lastUpdate: number;
+	sourceId: string;
+	title: string;
 	author?: string;
 	artist?: string;
-	url?: string;
-	nsfw: number;
-	tags?: string[];
-	title: string;
-	sourceId: string;
 	desc?: string;
+	tags?: string[];
 	cover?: string;
-	viewer: number;
+	url?: string;
 	status: number;
+	nsfw: number;
+	viewer: number;
 }
 
 export interface Chapter {
-	volume?: number;
-	mangaId: string;
-	lang: string;
-	id: string;
-	scanlator?: string;
-	title?: string;
 	sourceId: string;
-	dateUploaded?: number;
+	mangaId: string;
+	id: string;
+	title?: string;
+	scanlator?: string;
+	lang: string;
 	chapter?: number;
+	volume?: number;
+	dateUploaded?: Date;
 	sourceOrder: number;
 }
 
 export interface Library {
-	mangaId: string;
-	lastUpdated: number;
-	lastRead?: number;
+	lastOpened: Date;
+	lastUpdated: Date;
+	lastRead?: Date;
+	dateAdded: Date;
 	categories: string[];
-	dateAdded: number;
+
+	mangaId: string;
 	sourceId: string;
-	lastOpened: number;
 }
 
 export interface TrackItem {

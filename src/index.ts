@@ -17,6 +17,22 @@ const TACHIYOMI_TRACKERS: { [key: number]: string } = {
 	// 7: "mangaupdates"
 };
 
+/**
+ * Converts a Tachiyomi backup to an Aidoku backup.
+ *
+ * ### Notes
+ * The returned backup uses `Date` for storing dates, but Aidoku expects
+ * that JSON backups store the number of seconds since Unix epoch. Thus,
+ * when serializing the backup to JSON, you need to use a custom replacer:
+ *
+ *     JSON.stringify(backup, (key, value) => {
+ *         const date = Date.parse(v);
+ *         return isNaN(date) ? v : Math.floor(date / 1000);
+ *     });
+ *
+ * @param backup Decompressed Tachiyomi backup.
+ * @returns an Aidoku backup.
+ */
 export function toAidoku(backup: Uint8Array): AidokuResult {
 	const dateString = new Date(Date.now()).toISOString().split('T')[0];
 
@@ -33,7 +49,7 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 		chapters: [],
 		trackItems: [], // TODO
 		categories: decoded.backupCategories.map((c) => c.name),
-		date: Math.floor(Date.now() / 1000),
+		date: new Date(),
 		name: `Converted Tachiyomi Backup ${dateString}`,
 		version: '0.0.1',
 	};
@@ -55,13 +71,13 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 
 		aidokuBackup.library.push({
 			mangaId: aidokuManga.id,
-			lastUpdated: 0,
+			lastUpdated: new Date(0),
 			categories: manga.categories
 				.map((c) => categoriesMap[c.toString()])
 				.filter((c) => c !== undefined),
-			dateAdded: Math.floor(manga.dateAdded.divide(1000).toNumber()),
+			dateAdded: new Date(manga.dateAdded.toNumber()),
 			sourceId: converter.aidokuSourceId,
-			lastOpened: 0,
+			lastOpened: new Date(0),
 		});
 
 		manga.chapters.forEach((chapter) => {
@@ -75,11 +91,10 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 				chapterId: aidokuChapter.id,
 				completed: chapter.read,
 				sourceId: converter.aidokuSourceId,
-				dateRead: Math.floor(
+				dateRead: new Date(
 					[...manga.history, ...manga.brokenHistory]
 						.find((h) => h.url === chapter.url)
-						?.lastRead?.divide(1000)
-						.toNumber() ?? 0
+						?.lastRead?.toNumber() ?? 0
 				),
 			});
 		});

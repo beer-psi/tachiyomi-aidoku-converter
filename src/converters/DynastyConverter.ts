@@ -7,7 +7,7 @@ class DynastyConverter extends Converter {
 
 	override aidokuSourceId: string = 'en.dynastyscans';
 
-    override baseUrl: string = 'https://dynasty-scans.com';
+	override baseUrl: string = 'https://dynasty-scans.com';
 
 	override lang = 'en';
 

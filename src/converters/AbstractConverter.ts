@@ -1,7 +1,5 @@
-import { Chapter, Library, Manga, MangaStatus, MangaViewer } from '../types/aidoku';
+import { Chapter, Manga, MangaStatus, MangaViewer } from '../types/aidoku';
 import { BackupChapter, BackupManga } from '../types/tachiyomi';
-import protobuf from 'protobufjs/light';
-import Long from 'long';
 
 export abstract class Converter {
 	/**
@@ -58,7 +56,6 @@ export abstract class Converter {
 	toAidokuManga(manga: BackupManga): Manga {
 		return {
 			id: this.parseMangaId(manga.url),
-			lastUpdate: 0, // Not available,
 			author: manga.author ?? '',
 			url: this.parseMangaUrl(manga.url),
 			nsfw: 0, // Not available
@@ -79,7 +76,7 @@ export abstract class Converter {
 			lang: this.lang,
 			id: this.parseChapterId(chapter.url),
 			scanlator: chapter.scanlator ?? '',
-			dateUploaded: chapter.dateUpload.divide(1000).toNumber(),
+			dateUploaded: new Date(chapter.dateUpload.toNumber()),
 			chapter: chapter.chapterNumber,
 			sourceOrder: chapter.sourceOrder,
 		};

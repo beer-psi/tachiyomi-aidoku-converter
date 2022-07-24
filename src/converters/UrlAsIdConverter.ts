@@ -87,10 +87,5 @@ export default [
 		'7969606392351831672',
 		'vi.truyentranhlh'
 	),
-	new TachiUrlAsIdConverter(
-		'https://blogtruyen.vn',
-		'vi',
-		'7328966691702591431',
-		'vi.blogtruyen',
-	)
+	new TachiUrlAsIdConverter('https://blogtruyen.vn', 'vi', '7328966691702591431', 'vi.blogtruyen'),
 ];
