@@ -1,7 +1,8 @@
+import Long from 'long';
 import { Converter } from './AbstractConverter.js';
 
 class KoushokuConverter extends Converter {
-	override tachiyomiSourceId: string = '3888499300158886492';
+	override tachiyomiSourceId: Long = new Long(-413969828, 905361794, false); // 3888499300158886492
 
 	override aidokuSourceId: string = 'en.koushoku';
 

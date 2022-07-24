@@ -1,6 +1,7 @@
+import Long from 'long';
 import { Converter } from './AbstractConverter.js';
 declare class KoushokuConverter extends Converter {
-    tachiyomiSourceId: string;
+    tachiyomiSourceId: Long;
     aidokuSourceId: string;
     lang: string;
     baseUrl: string;

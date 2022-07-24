@@ -1,7 +1,8 @@
+import Long from 'long';
 import { Converter } from './AbstractConverter.js';
 
 class HentaiVNConverter extends Converter {
-	override tachiyomiSourceId: string = '6560768551969686205';
+	override tachiyomiSourceId: Long = new Long(-776666435, 1527547964, false); // 6560768551969686205
 
 	override aidokuSourceId: string = 'vi.hentaivn';
 

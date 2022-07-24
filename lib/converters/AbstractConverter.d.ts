@@ -1,10 +1,11 @@
+import Long from 'long';
 import { Chapter, Manga } from '../types/aidoku.js';
 import { BackupChapter, BackupManga } from '../types/tachiyomi.js';
 export declare abstract class Converter {
     /**
      * The Tachiyomi source ID for this source.
      */
-    abstract tachiyomiSourceId: string;
+    abstract tachiyomiSourceId: Long;
     /**
      * The Aidoku source ID for this source.
      */

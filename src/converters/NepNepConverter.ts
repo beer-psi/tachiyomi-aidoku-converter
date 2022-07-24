@@ -1,7 +1,8 @@
+import Long from 'long';
 import { Converter } from './AbstractConverter.js';
 
 class NepNepConverter extends Converter {
-	constructor(public baseUrl: string, public tachiyomiSourceId: string) {
+	constructor(public baseUrl: string, public tachiyomiSourceId: Long) {
 		super();
 	}
 
@@ -23,6 +24,6 @@ class NepNepConverter extends Converter {
 }
 
 export default [
-	new NepNepConverter('https://mangasee123.com', '9'),
-	new NepNepConverter('https://manga4life.com', '7798162483793432927'),
+	new NepNepConverter('https://mangasee123.com', new Long(9, 0, false)), // 9
+	new NepNepConverter('https://manga4life.com', new Long(1799950687, 1815651190, false)), // 7798162483793432927
 ];

@@ -1,3 +1,4 @@
+import Long from 'long';
 import { Converter } from './AbstractConverter.js';
 /**
  * Generic converter class for sources that use the full URL as the manga/chapter ID.
@@ -5,9 +6,9 @@ import { Converter } from './AbstractConverter.js';
 declare class UrlAsIdConverter extends Converter {
     baseUrl: string;
     lang: string;
-    tachiyomiSourceId: string;
+    tachiyomiSourceId: Long;
     aidokuSourceId: string;
-    constructor(baseUrl: string, lang: string, tachiyomiSourceId: string, aidokuSourceId: string);
+    constructor(baseUrl: string, lang: string, tachiyomiSourceId: Long, aidokuSourceId: string);
     parseMangaId(url: string): string;
     parseChapterId(url: string): string;
     parseMangaUrl(url: string): string;
@@ -19,9 +20,9 @@ declare class UrlAsIdConverter extends Converter {
 declare class TachiUrlAsIdConverter extends Converter {
     baseUrl: string;
     lang: string;
-    tachiyomiSourceId: string;
+    tachiyomiSourceId: Long;
     aidokuSourceId: string;
-    constructor(baseUrl: string, lang: string, tachiyomiSourceId: string, aidokuSourceId: string);
+    constructor(baseUrl: string, lang: string, tachiyomiSourceId: Long, aidokuSourceId: string);
     parseMangaId(url: string): string;
     parseChapterId(url: string): string;
 }

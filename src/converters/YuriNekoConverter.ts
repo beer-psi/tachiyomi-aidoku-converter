@@ -1,7 +1,8 @@
+import Long from 'long';
 import { Converter } from './AbstractConverter.js';
 
 class YuriNekoConverter extends Converter {
-	override tachiyomiSourceId: string = '4413681066613655890';
+	override tachiyomiSourceId: Long = new Long(-1621112494, 1027640203, false); // 4413681066613655890
 
 	override aidokuSourceId: string = 'vi.yurianeko';
 

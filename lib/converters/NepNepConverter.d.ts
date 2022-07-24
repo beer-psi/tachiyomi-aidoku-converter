@@ -1,8 +1,9 @@
+import Long from 'long';
 import { Converter } from './AbstractConverter.js';
 declare class NepNepConverter extends Converter {
     baseUrl: string;
-    tachiyomiSourceId: string;
-    constructor(baseUrl: string, tachiyomiSourceId: string);
+    tachiyomiSourceId: Long;
+    constructor(baseUrl: string, tachiyomiSourceId: Long);
     aidokuSourceId: string;
     lang: string;
     parseMangaId(url: string): string;

@@ -1,6 +1,7 @@
+import Long from 'long';
 import { Converter } from './AbstractConverter.js';
 declare class HentaiVNConverter extends Converter {
-    tachiyomiSourceId: string;
+    tachiyomiSourceId: Long;
     aidokuSourceId: string;
     baseUrl: string;
     lang: string;

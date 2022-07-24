@@ -1,3 +1,4 @@
+import Long from 'long';
 import { Converter } from './AbstractConverter.js';
 declare abstract class MangaBoxConverter extends Converter {
     parseMangaId(url: string): string;
@@ -5,14 +6,14 @@ declare abstract class MangaBoxConverter extends Converter {
 }
 declare class MangaBatConverter extends MangaBoxConverter {
     baseUrl: string;
-    tachiyomiSourceId: string;
+    tachiyomiSourceId: Long;
     aidokuSourceId: string;
     lang: string;
     parseMangaUrl(url: string): string;
 }
 declare class MangaNatoConverter extends MangaBoxConverter {
     baseUrl: string;
-    tachiyomiSourceId: string;
+    tachiyomiSourceId: Long;
     aidokuSourceId: string;
     lang: string;
     parseMangaUrl(url: string): string;

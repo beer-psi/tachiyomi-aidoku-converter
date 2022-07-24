@@ -1,7 +1,8 @@
+import Long from 'long';
 import { Converter } from './AbstractConverter.js';
 declare class DynastyConverter extends Converter {
-    tachiyomiSourceId: string;
-    constructor(tachiyomiSourceId: string);
+    tachiyomiSourceId: Long;
+    constructor(tachiyomiSourceId: Long);
     aidokuSourceId: string;
     baseUrl: string;
     lang: string;

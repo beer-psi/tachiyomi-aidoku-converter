@@ -1,6 +1,7 @@
 import converters from './converters/index.js';
 import { Backup } from './types/tachiyomi.js';
 import { AidokuBackup } from './types/aidoku.js';
+import Long from 'long';
 
 interface AidokuResult {
 	backup: AidokuBackup;
@@ -16,6 +17,24 @@ const TACHIYOMI_TRACKERS: { [key: number]: string } = {
 	// 6: "komga",
 	// 7: "mangaupdates"
 };
+
+class LongSet extends Set<Long> {
+	override has(o: Long): boolean {
+		for (const i of this) {
+			if (i.eq(o)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	override add(o: Long): this {
+		if (!this.has(o)) {
+			Set.prototype.add.call(this, o);
+		}
+		return this;
+	}
+}
 
 /**
  * Converts a Tachiyomi backup to an Aidoku backup.
@@ -54,13 +73,13 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 		version: '0.0.1',
 	};
 
-	const convertersNotFound: Set<string> = new Set<string>();
+	const convertersNotFound: LongSet = new LongSet();
 	const sources: Set<string> = new Set<string>();
 
 	decoded.backupManga.forEach((manga) => {
-		const converter = converters.find((c) => c.tachiyomiSourceId === manga.source.toString());
+		const converter = converters.find((c) => c.tachiyomiSourceId.eq(manga.source));
 		if (!converter) {
-			convertersNotFound.add(manga.source.toString());
+			convertersNotFound.add(manga.source);
 			return;
 		}
 		sources.add(converter.aidokuSourceId);

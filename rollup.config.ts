@@ -4,7 +4,7 @@ import esbuild from "rollup-plugin-esbuild";
 import commonjs from "@rollup/plugin-commonjs";
 
 export default defineConfig({
-    input: "src/index.ts",
+    input: "lib/index.js",
     output: {
         file: "dist/index.js",
         format: "iife",
