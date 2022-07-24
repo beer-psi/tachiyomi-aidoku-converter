@@ -1,6 +1,6 @@
 {
   "name": "tachiyomi-aidoku-converter",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "",
   "type": "module",
   "main": "lib/index.js",
