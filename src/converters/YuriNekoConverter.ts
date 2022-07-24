@@ -1,4 +1,4 @@
-import { Converter } from './AbstractConverter';
+import { Converter } from './AbstractConverter.js';
 
 class YuriNekoConverter extends Converter {
 	override tachiyomiSourceId: string = '4413681066613655890';

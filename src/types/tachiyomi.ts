@@ -1,4 +1,4 @@
-import protobuf from 'protobufjs/light';
+import protobuf from 'protobufjs/light.js';
 import Long from 'long';
 export const { Message, Field, Type } = protobuf;
 

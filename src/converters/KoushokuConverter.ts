@@ -1,4 +1,4 @@
-import { Converter } from './AbstractConverter';
+import { Converter } from './AbstractConverter.js';
 
 class KoushokuConverter extends Converter {
 	override tachiyomiSourceId: string = '3888499300158886492';

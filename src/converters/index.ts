@@ -1,14 +1,14 @@
-import { Converter } from './AbstractConverter';
-import MangaDexConverters from './MangaDexConverter';
-import NepNepConverters from './NepNepConverter';
-import MangaBoxConverters from './MangaBoxConverter';
-import UrlAsIdConverters from './UrlAsIdConverter';
-import MadaraConverters from './MadaraConverter';
-import NHentaiConverters from './NHentaiConverter';
-import DynastyConverters from './DynastyConverter';
-import YuriNekoConverter from './YuriNekoConverter';
-import HentaiVNConverter from './HentaiVNConverter';
-import KoushokuConverter from './KoushokuConverter';
+import { Converter } from './AbstractConverter.js';
+import MangaDexConverters from './MangaDexConverter.js';
+import NepNepConverters from './NepNepConverter.js';
+import MangaBoxConverters from './MangaBoxConverter.js';
+import UrlAsIdConverters from './UrlAsIdConverter.js';
+import MadaraConverters from './MadaraConverter.js';
+import NHentaiConverters from './NHentaiConverter.js';
+import DynastyConverters from './DynastyConverter.js';
+import YuriNekoConverter from './YuriNekoConverter.js';
+import HentaiVNConverter from './HentaiVNConverter.js';
+import KoushokuConverter from './KoushokuConverter.js';
 
 export default [
 	...MangaDexConverters,

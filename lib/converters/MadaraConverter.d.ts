@@ -1,4 +1,4 @@
-import { Converter } from './AbstractConverter';
+import { Converter } from './AbstractConverter.js';
 declare class MadaraConverter extends Converter {
     baseUrl: string;
     lang: string;

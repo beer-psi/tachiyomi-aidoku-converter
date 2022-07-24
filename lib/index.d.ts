@@ -1,4 +1,4 @@
-import { AidokuBackup } from './types/aidoku';
+import { AidokuBackup } from './types/aidoku.js';
 interface AidokuResult {
     backup: AidokuBackup;
     dateString: string;

@@ -1,4 +1,4 @@
-import protobuf from 'protobufjs/light';
+import protobuf from 'protobufjs/light.js';
 import Long from 'long';
 export declare const Message: typeof protobuf.Message, Field: typeof protobuf.Field, Type: typeof protobuf.Type;
 export declare class BrokenBackupHistory extends Message<BrokenBackupHistory> {

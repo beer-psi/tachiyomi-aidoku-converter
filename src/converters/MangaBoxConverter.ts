@@ -1,4 +1,4 @@
-import { Converter } from './AbstractConverter';
+import { Converter } from './AbstractConverter.js';
 
 abstract class MangaBoxConverter extends Converter {
 	override parseMangaId(url: string): string {

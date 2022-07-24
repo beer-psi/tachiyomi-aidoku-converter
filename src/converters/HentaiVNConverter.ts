@@ -1,4 +1,4 @@
-import { Converter } from './AbstractConverter';
+import { Converter } from './AbstractConverter.js';
 
 class HentaiVNConverter extends Converter {
 	override tachiyomiSourceId: string = '6560768551969686205';

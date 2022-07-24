@@ -1,6 +1,6 @@
 import { Manga } from '../types/aidoku';
 import { BackupManga } from '../types/tachiyomi';
-import { Converter } from './AbstractConverter';
+import { Converter } from './AbstractConverter.js';
 declare class MangaDexConverter extends Converter {
     tachiyomiSourceId: string;
     lang: string;

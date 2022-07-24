@@ -1,6 +1,6 @@
-import converters from './converters/index';
-import { Backup } from './types/tachiyomi';
-import { AidokuBackup } from './types/aidoku';
+import converters from './converters/index.js';
+import { Backup } from './types/tachiyomi.js';
+import { AidokuBackup } from './types/aidoku.js';
 
 interface AidokuResult {
 	backup: AidokuBackup;

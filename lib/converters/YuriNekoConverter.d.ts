@@ -1,4 +1,4 @@
-import { Converter } from './AbstractConverter';
+import { Converter } from './AbstractConverter.js';
 declare class YuriNekoConverter extends Converter {
     tachiyomiSourceId: string;
     aidokuSourceId: string;

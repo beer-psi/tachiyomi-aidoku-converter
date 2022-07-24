@@ -1,4 +1,4 @@
-import { Converter } from './AbstractConverter';
+import { Converter } from './AbstractConverter.js';
 
 class DynastyConverter extends Converter {
 	constructor(public tachiyomiSourceId: string) {

@@ -1,4 +1,4 @@
-import { Converter } from './AbstractConverter';
+import { Converter } from './AbstractConverter.js';
 declare class NepNepConverter extends Converter {
     baseUrl: string;
     tachiyomiSourceId: string;
