@@ -1,5 +1,5 @@
 import Long from 'long';
-import { Converter } from './AbstractConverter';
+import { Converter } from './AbstractConverter.js';
 declare class DmzjConverter extends Converter {
     tachiyomiSourceId: Long;
     aidokuSourceId: string;

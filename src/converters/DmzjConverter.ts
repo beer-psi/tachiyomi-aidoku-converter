@@ -1,5 +1,5 @@
 import Long from 'long';
-import { Converter } from './AbstractConverter';
+import { Converter } from './AbstractConverter.js';
 
 class DmzjConverter extends Converter {
 	override tachiyomiSourceId: Long = new Long(-579982820, 671527822, false); // 2884190037559093788
