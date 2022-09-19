@@ -96,16 +96,18 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 
 		aidokuBackup.manga.push(aidokuManga);
 
-		aidokuBackup.library.push({
-			mangaId: aidokuManga.id,
-			lastUpdated: new Date(0),
-			categories: manga.categories
-				.map((c) => categoriesMap[c.toString()])
-				.filter((c) => c !== undefined),
-			dateAdded: new Date(manga.dateAdded.toNumber()),
-			sourceId: converter.aidokuSourceId,
-			lastOpened: new Date(0),
-		});
+		if (manga.dateAdded.ne(0)) {
+			aidokuBackup.library.push({
+				mangaId: aidokuManga.id,
+				lastUpdated: new Date(0),
+				categories: manga.categories
+					.map((c) => categoriesMap[c.toString()])
+					.filter((c) => c !== undefined),
+				dateAdded: new Date(manga.dateAdded.toNumber()),
+				sourceId: converter.aidokuSourceId,
+				lastOpened: new Date(0),
+			});
+		}
 
 		manga.chapters.forEach((chapter) => {
 			const aidokuChapter = converter.toAidokuChapter(manga, chapter);
