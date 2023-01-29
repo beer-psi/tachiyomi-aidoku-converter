@@ -1,8 +1,8 @@
-import converters from './converters/index.js';
 import Long from 'long';
 import protobuf from 'protobufjs/light.js';
 import { Backup } from './types/tachiyomi.js';
 import { AidokuBackup } from './types/aidoku.js';
+import { Converter } from './Converter.js';
 
 protobuf.util.Long = Long;
 protobuf.configure();
@@ -23,24 +23,6 @@ const TACHIYOMI_TRACKERS: { [key: number]: string } = {
 	// 7: "mangaupdates"
 };
 
-class LongSet extends Set<Long> {
-	override has(o: Long): boolean {
-		for (const i of this) {
-			if (o.eq(i)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	override add(o: Long): this {
-		if (!this.has(o)) {
-			Set.prototype.add.call(this, o);
-		}
-		return this;
-	}
-}
-
 /**
  * Converts a Tachiyomi backup to an Aidoku backup.
  *
@@ -60,10 +42,12 @@ class LongSet extends Set<Long> {
 export function toAidoku(backup: Uint8Array): AidokuResult {
 	const dateString = new Date().toISOString().split('T')[0];
 
-	const decoded: Backup = Backup.decode(backup);
+	const decodedBackup: Backup = Backup.decode(backup);
 	const categoriesMap = Object.fromEntries(
-		decoded.backupCategories.map((c) => [c.order.toString(), c.name])
+		decodedBackup.backupCategories.map((c) => [c.order.toString(), c.name])
 	);
+	const converters = decodedBackup.backupSources.map((c) => new Converter(c));
+	const sources = new Set<string>();
 
 	const aidokuBackup: AidokuBackup = {
 		library: [],
@@ -72,22 +56,15 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 		manga: [],
 		chapters: [],
 		trackItems: [], // TODO
-		categories: decoded.backupCategories.map((c) => c.name),
+		categories: decodedBackup.backupCategories.map((c) => c.name),
 		date: new Date(),
 		name: `Converted Tachiyomi Backup ${dateString}`,
 		version: '0.0.1',
 	};
 
-	const convertersNotFound: LongSet = new LongSet();
-	const sources: Set<string> = new Set<string>();
-
-	decoded.backupManga.forEach((manga) => {
+	decodedBackup.backupManga.forEach((manga) => {
 		const converter = converters.find((c) => c.tachiyomiSourceId.eq(manga.source));
-		if (!converter) {
-			// Filter out local manga and TachiyomiAZ/EH merged manga
-			if (manga.source.ne(0) && manga.source.ne(6969)) {
-				convertersNotFound.add(manga.source);
-			}
+		if (converter === null || converter === undefined) {
 			return;
 		}
 		sources.add(converter.aidokuSourceId);
@@ -146,18 +123,10 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 		);
 	});
 
-	if (convertersNotFound.size > 0) {
-		console.log(
-			`Could not find converters for ${
-				convertersNotFound.size
-			} sources. Your library may not be complete.\n- ${[...convertersNotFound].join('\n- ')}`
-		);
-	}
-
 	aidokuBackup.sources = [...sources];
 	return {
 		backup: aidokuBackup,
 		dateString: dateString,
-		missingSources: [...convertersNotFound].map((id) => id.toString()),
+		missingSources: [],
 	};
 }

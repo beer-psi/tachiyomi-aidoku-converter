@@ -1,39 +1,21 @@
 import Long from 'long';
-import { Chapter, Manga, MangaStatus, MangaViewer } from '../types/aidoku.js';
-import { BackupChapter, BackupManga } from '../types/tachiyomi.js';
+import { Chapter, Manga, MangaStatus, MangaViewer } from './types/aidoku.js';
+import { BackupChapter, BackupManga, BackupSource, BrokenBackupSource } from './types/tachiyomi.js';
 
-export abstract class Converter {
+export class Converter {
 	/**
 	 * The Tachiyomi source ID for this source.
 	 */
-	abstract tachiyomiSourceId: Long;
+	tachiyomiSourceId: Long;
 
 	/**
 	 * The Aidoku source ID for this source.
 	 */
-	abstract aidokuSourceId: string;
+	aidokuSourceId: string;
 
-	/**
-	 * The language for this extension
-	 */
-	abstract lang: string;
-
-	abstract baseUrl: string;
-
-	/**
-	 * Converts a Tachiyomi BackupManga.url to an Aidoku manga identifier.
-	 * @param url
-	 */
-	abstract parseMangaId(url: string): string;
-
-	/**
-	 * Converts a Tachiyomi BackupChapter.url to an Aidoku chapter identifier.
-	 * @param url
-	 */
-	abstract parseChapterId(url: string): string;
-
-	parseMangaUrl(url: string): string {
-		return `${this.baseUrl}${url}`;
+	constructor(tachiyomiSource: BackupSource | BrokenBackupSource) {
+		this.tachiyomiSourceId = tachiyomiSource.sourceId;
+		this.aidokuSourceId = tachiyomiSource.name.toLowerCase();
 	}
 
 	private mangaViewer: { [key: number]: MangaViewer } = {
@@ -56,9 +38,9 @@ export abstract class Converter {
 
 	toAidokuManga(manga: BackupManga): Manga {
 		return {
-			id: this.parseMangaId(manga.url),
+			id: manga.url,
 			author: manga.author ?? '',
-			url: this.parseMangaUrl(manga.url),
+			url: manga.url,
 			nsfw: 0, // Not available
 			tags: manga.genre,
 			title: manga.title,
@@ -73,9 +55,9 @@ export abstract class Converter {
 	toAidokuChapter(manga: BackupManga, chapter: BackupChapter): Chapter {
 		return {
 			sourceId: this.aidokuSourceId,
-			mangaId: this.parseMangaId(manga.url),
-			lang: this.lang,
-			id: this.parseChapterId(chapter.url),
+			mangaId: manga.url,
+			lang: '',
+			id: chapter.url,
 			scanlator: chapter.scanlator ?? '',
 			dateUploaded: new Date(chapter.dateUpload.toNumber()),
 			chapter: chapter.chapterNumber,
