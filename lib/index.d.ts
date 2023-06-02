@@ -1,8 +1,9 @@
 import { AidokuBackup } from './types/aidoku.js';
 interface AidokuResult {
-    backup: AidokuBackup;
+    backup: AidokuBackup | Uint8Array;
     dateString: string;
     missingSources: string[];
+    ids?: Record<string, string>;
 }
 /**
  * Converts a Tachiyomi backup to an Aidoku backup.
@@ -21,4 +22,5 @@ interface AidokuResult {
  * @returns an Aidoku backup.
  */
 export declare function toAidoku(backup: Uint8Array): AidokuResult;
+export declare function toTachiyomi(backup: AidokuBackup): Promise<AidokuResult>;
 export {};

@@ -16,7 +16,4 @@ interface AidokuResult {
 }
 ```
 
-## Writing converters
-Aidoku sources are just built different, so converters need to be written to transform
-Tachiyomi manga objects to something that Aidoku sources can understand. Check out the
-[converters](https://github.com/beerpiss/tachiyomi-aidoku-converter/tree/trunk/src/converters).
+After you import the backup, use the migration feature to migrate the entries.

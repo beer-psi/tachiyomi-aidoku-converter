@@ -167,7 +167,7 @@ export class BackupManga extends Message<BackupManga> {
 	public tracking: BackupTracking[] = [];
 
 	@Field.d(100, 'bool')
-	public favorite: boolean = false;
+	public favorite: boolean = true;
 
 	@Field.d(101, 'int32')
 	public chapterFlags: number = 0;

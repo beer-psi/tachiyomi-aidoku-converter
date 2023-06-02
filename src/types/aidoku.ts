@@ -68,7 +68,7 @@ export interface TrackItem {
 	title?: string;
 }
 
-export enum MangaViewer {
+export const enum MangaViewer {
 	Default = 0,
 	RTL = 1,
 	LTR = 2,
@@ -76,7 +76,7 @@ export enum MangaViewer {
 	Scroll = 4,
 }
 
-export enum MangaStatus {
+export const enum MangaStatus {
 	Unknown = 0,
 	Ongoing = 1,
 	Completed = 2,

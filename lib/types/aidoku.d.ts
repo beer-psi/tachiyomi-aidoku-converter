@@ -61,14 +61,14 @@ export interface TrackItem {
     sourceId: string;
     title?: string;
 }
-export declare enum MangaViewer {
+export declare const enum MangaViewer {
     Default = 0,
     RTL = 1,
     LTR = 2,
     Vertical = 3,
     Scroll = 4
 }
-export declare enum MangaStatus {
+export declare const enum MangaStatus {
     Unknown = 0,
     Ongoing = 1,
     Completed = 2,

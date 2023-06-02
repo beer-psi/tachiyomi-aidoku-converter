@@ -1,27 +1,19 @@
 import Long from 'long';
-import protobuf from 'protobufjs/light.js';
-import { Backup } from './types/tachiyomi.js';
+import protobuf, { Properties } from 'protobufjs/light.js';
+import { Backup, BackupCategory } from './types/tachiyomi.js';
 import { AidokuBackup } from './types/aidoku.js';
 import { Converter } from './Converter.js';
+import { TACHIYOMI_TO_AIDOKU_TRACKERS } from './utils.js';
 
 protobuf.util.Long = Long;
 protobuf.configure();
 
 interface AidokuResult {
-	backup: AidokuBackup;
+	backup: AidokuBackup | Uint8Array;
 	dateString: string;
 	missingSources: string[];
+	ids?: Record<string, string>;
 }
-
-const TACHIYOMI_TRACKERS: { [key: number]: string } = {
-	1: 'myanimelist',
-	2: 'anilist',
-	// 3: "kitsu",
-	// 4: "shikimori",
-	// 5: "bangumi",
-	// 6: "komga",
-	// 7: "mangaupdates"
-};
 
 /**
  * Converts a Tachiyomi backup to an Aidoku backup.
@@ -63,7 +55,7 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 	};
 
 	decodedBackup.backupManga.forEach((manga) => {
-		const converter = converters.find((c) => c.tachiyomiSourceId.eq(manga.source));
+		const converter = converters.find((c) => c.tachiyomiSource.sourceId.eq(manga.source));
 		if (converter === null || converter === undefined) {
 			return;
 		}
@@ -115,7 +107,7 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 					// HACK: For now, there's only tracking support for MAL and AniList, which has similar
 					// URL structures. I'm not going to bother writing another converter class.
 					id: t.trackingUrl.split('/')[4],
-					trackerId: TACHIYOMI_TRACKERS[t.syncId],
+					trackerId: TACHIYOMI_TO_AIDOKU_TRACKERS[t.syncId],
 					mangaId: aidokuManga.id,
 					sourceId: converter.aidokuSourceId,
 					title: aidokuManga.title,
@@ -129,4 +121,48 @@ export function toAidoku(backup: Uint8Array): AidokuResult {
 		dateString: dateString,
 		missingSources: [],
 	};
+}
+
+export async function toTachiyomi(backup: AidokuBackup): Promise<AidokuResult> {
+	const dateString = new Date().toISOString().split('T')[0];
+
+	const tachiyomiBackup: Properties<Backup> = {
+		backupManga: [],
+		backupCategories: [],
+		backupSources: [],
+	};
+
+	const converters = await Promise.all(backup.sources.map((s) => Converter.fromAidokuSource(s)));
+	
+	tachiyomiBackup.backupCategories = backup.categories.map((c, i) => BackupCategory.fromObject({
+		name: c,
+		order: Long.fromNumber(i),
+	}));
+	console.log(tachiyomiBackup.backupCategories);
+	tachiyomiBackup.backupSources = converters.map((c) => c.tachiyomiSource);
+	tachiyomiBackup.backupManga = await Promise.all(backup.manga.map(async (manga) => {
+		const converter = converters.find((c) => c.aidokuSourceId === manga.sourceId);
+		if (converter === null || converter === undefined) {
+			throw new Error(`Could not find converter for source ${manga.sourceId}. Something went horribly wrong.`);
+		}
+
+		const tachiyomiManga = await converter.toTachiyomiManga(manga, {
+			library: backup.library.find((l) => l.mangaId === manga.id),
+			histories: backup.history.filter((h) => h.mangaId === manga.id),
+			chapters: backup.chapters.filter((c) => c.mangaId === manga.id),
+			categories: backup.categories,
+		});
+
+		return tachiyomiManga;
+	}));
+
+	return {
+		backup: Backup.encode(tachiyomiBackup).finish(),
+		dateString,
+		missingSources: [],
+		ids: converters.reduce<Record<string, string>>((acc, c) => {
+			acc[c.tachiyomiSource.sourceId.toString()] = c.aidokuSourceId;
+			return acc;
+		}, {}),
+	}
 }
