@@ -14,7 +14,7 @@
   "license": "0BSD",
   "dependencies": {
     "long": "~5.2.0",
-    "protobufjs": "~7.2.4"
+    "protobufjs": "~7.2.5"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "~22.0.1",
